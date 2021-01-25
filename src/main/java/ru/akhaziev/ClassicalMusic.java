@@ -2,26 +2,24 @@ package ru.akhaziev;
 
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 @Component
 public class ClassicalMusic implements Music {
 
-    private ClassicalMusic() {}
+    List<String> classicalSongs = new ArrayList<>();
 
-    public static ClassicalMusic getClassicalMusic() {
-        System.out.println("Using factory method");
-        return new ClassicalMusic();
+    public ClassicalMusic() {
+        classicalSongs.add("Classical song 1");
+        classicalSongs.add("Classical song 2");
+        classicalSongs.add("Classical song 3");
     }
 
-    public void doMyInit() {
-        System.out.println("Doing my initialization");
-    }
-
-    public void doMyDestroy() {
-        System.out.println("Doing my destruction");
-    }
-
-    @Override
     public String getSong() {
-        return "Hungarian Rhapsody";
+        Random random = new Random();
+        int numberOfSong = random.nextInt(classicalSongs.size());
+        return classicalSongs.get(numberOfSong);
     }
 }
